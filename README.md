@@ -1,1 +1,1 @@
-# tf-learn-aws-basic-modules
+# tf-learn-aws
