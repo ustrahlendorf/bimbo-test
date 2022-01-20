@@ -11,7 +11,7 @@ module "web_server_sg" {
 }
 
 resource "aws_instance" "app_server" {
-  ami                    = "${var.ami_amznLinux2}"
+  ami                    = data.aws_ami.amazon_linux_2.image_id
   instance_type          = var.appServer_instance_type
   subnet_id              = "${module.vpc.private_subnets[0]}"
   vpc_security_group_ids = ["${module.web_server_sg.security_group_id}"]
