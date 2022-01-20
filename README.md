@@ -1,1 +1,1 @@
-# bimbo-test
+# tf-learn-aws-basic-modules
