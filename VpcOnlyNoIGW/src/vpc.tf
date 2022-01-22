@@ -14,8 +14,8 @@ module "vpc" {
 
   default_security_group_name = "tf-default"
 
-  enable_nat_gateway = true
-  single_nat_gateway = true
+  enable_nat_gateway = false
+  single_nat_gateway = false
 
   enable_vpn_gateway = false
 
