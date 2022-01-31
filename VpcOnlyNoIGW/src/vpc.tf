@@ -22,6 +22,11 @@ module "vpc" {
   private_route_table_tags = { Name = "AppPrivRT-${module.vpc.name}" }
   intra_route_table_tags   = { Name = "DataPrivRT-${module.vpc.name}" }
 
+  vpc_tags         = { Name = "VPC-${module.vpc.name}" }
+  igw_tags         = { Name = "IGW-${module.vpc.name}" }
+  nat_gateway_tags = { Name = "NATGW-${module.vpc.name}" }
+  nat_eip_tags     = { Name = "EIP-NATGW-${module.vpc.name}" }
+
   #  manage_default_route_table = true
   #  default_route_table_tags   = { Name = "default-${module.vpc.name}" }
   #
