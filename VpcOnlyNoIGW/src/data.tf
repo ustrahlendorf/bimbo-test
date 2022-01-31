@@ -1,3 +1,7 @@
+data "aws_availability_zones" "current" {}
+
+data "aws_region" "current" {}
+
 #data "aws_vpc" "this" {
 #  tags = {
 #    Name = var.base_name
