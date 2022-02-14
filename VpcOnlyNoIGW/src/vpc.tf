@@ -33,19 +33,35 @@ module "vpc" {
   #  manage_default_security_group = true
   #  default_security_group_tags   = { Name = "default-${module.vpc.name}" }
 
-  enable_nat_gateway = true
-  single_nat_gateway = true
+  enable_dns_hostnames = true
+  enable_dns_support   = true
+
+  enable_nat_gateway = false
+  single_nat_gateway = false
 
   enable_vpn_gateway = false
 
   # VPC Flow Logs (Cloudwatch log group and IAM role will be created)
-  enable_flow_log                      = true
-  create_flow_log_cloudwatch_log_group = true
-  create_flow_log_cloudwatch_iam_role  = true
-  flow_log_max_aggregation_interval    = 60
-  vpc_flow_log_tags                    = { Name = "flow_log-${module.vpc.name}" }
+  # enable_flow_log                      = false
+  # create_flow_log_cloudwatch_log_group = false
+  # create_flow_log_cloudwatch_iam_role  = false
+  # flow_log_max_aggregation_interval    = 60
+  # vpc_flow_log_tags                    = { Name = "flow_log-${module.vpc.name}" }
 
   tags = local.default_tags
+}
+
+resource "aws_flow_log" "this" {
+  iam_role_arn             = aws_iam_role.vpc_flow_log_cloudwatch.arn
+  log_destination          = aws_cloudwatch_log_group.example.arn
+  traffic_type             = "ALL"
+  vpc_id                   = module.vpc.vpc_id
+  max_aggregation_interval = 60
+  tags                     = local.default_tags
+}
+
+resource "aws_cloudwatch_log_group" "example" {
+  name = "example"
 }
 
 
